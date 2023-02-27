@@ -1,0 +1,78 @@
+#root {
+  //background-image: $root;
+  background: #000;
+}
+h1, ant-divider-inner-text {
+  color: #fff;
+}
+
+.site-layout {
+  height: 100vh;
+  background: linear-gradient(255.18deg, #B224FC -2.04%, #27007A 103.77%);
+  .title {
+    margin: 5vw 0 3vw;
+    span, h1 {
+      color: #fff
+    }
+  }
+}
+
+.bg-img {
+  position: absolute;
+  .bg1 {
+    position: fixed;
+    width: 36%;
+    right: 10%;
+    top: 5%;
+  }
+  .bg2 {
+    width: 25%;
+    position: fixed;
+    bottom: 15%;
+    left: 10%;
+  }
+}
+
+.main_content {
+  & > .ant-col {
+    margin-bottom: 30px;
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+  z-index: 9;
+  position: relative;
+  min-width: 400px;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 30px;
+  padding: 40px;
+  margin: auto;
+  .drop_btn > button.ant-btn {
+    color: #000;
+    width: 100%;
+    background: #fff;
+    border: none;
+    box-shadow: 1px 1px 10px 3px rgba(0, 0, 0, 0.2);
+    .ant-space {
+      justify-content: space-between;
+      display: flex;
+    }
+  }
+  button {
+    height: 50px;
+    background: #8000D0;
+    box-shadow: 1px 1px 10px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    border: none;
+    width: 100%;
+    color: #fff;
+  }
+  input {
+    height: 50px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.38);
+    border: 1px solid #FFFFFF;
+  }
+
+}
