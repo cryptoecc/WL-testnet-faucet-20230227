@@ -160,10 +160,10 @@ const AppLayout = () => {
             <Content className="site-layout">
                 <Row justify={'center'} style={{textAlign:'center'}} className={'title'}>
                     <Col span={24}>
-                        <Title level={1}>Request testnet ETH</Title>
+                        <Title level={1}>WorldLand TEST NETWORK</Title>
                     </Col>
                     <Col span={24}>
-                        <Text>We created an Ethereum Faucet for WLEth.</Text>
+                        <Text>Fast and reliable. 0.1 wlETH/day.</Text>
                     </Col>
                 </Row>
 
@@ -172,7 +172,6 @@ const AppLayout = () => {
                         <Button type="primary" block onClick={()=>{initWeb3()}}>
                             Connect Wallet
                         </Button>
-                        {/* <ButtonComponent /> */}
                     </Col>
                     <Col span={24}>
                         <Divider>and</Divider>
@@ -206,8 +205,8 @@ const AppLayout = () => {
                     </Col>
                     <Col span={24}>
                         <Row gutter={12}>
-                            <Col span={18}><Input placeholder="Basic usage" /></Col>
-                            <Col span={6}><Button onClick={()=>{SendETH()}}>{}Send me ETH</Button></Col>
+                            {/* <Col span={18}><Input placeholder="0.1 WLC" disabled /></Col> */}
+                            <Col span={24}><Button onClick={()=>{SendETH()}}>{}Send me WLC</Button></Col>
                         </Row>
                     </Col>
                 </Row>
