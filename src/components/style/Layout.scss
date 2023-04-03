@@ -1,5 +1,5 @@
 #root {
-  //background-image: $root;
+  // background-image: $root;
   background: #000;
 }
 h1, ant-divider-inner-text {
@@ -8,7 +8,8 @@ h1, ant-divider-inner-text {
 
 .site-layout {
   height: 100vh;
-  background: linear-gradient(255.18deg, #B224FC -2.04%, #27007A 103.77%);
+  background: linear-gradient(255.18deg, #271b90 -2.04%, #592699 103.77%);
+  // background: linear-gradient(255.18deg, #B224FC -2.04%, #27007A 103.77%);
   .title {
     margin: 5vw 0 3vw;
     span, h1 {
@@ -61,7 +62,8 @@ h1, ant-divider-inner-text {
   }
   button {
     height: 50px;
-    background: #8000D0;
+    background: #372fcc;
+    // background: #8000D0;
     box-shadow: 1px 1px 10px 3px rgba(0, 0, 0, 0.2);
     border-radius: 12px;
     border: none;
@@ -74,5 +76,4 @@ h1, ant-divider-inner-text {
     background: rgba(255, 255, 255, 0.38);
     border: 1px solid #FFFFFF;
   }
-
 }

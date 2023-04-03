@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Layout, Typography ,Row, Col, Button,Divider, Input} from 'antd';
 import '../style/Layout.scss';
 import bg1 from '../../assets/bg_img1.svg';
@@ -18,21 +18,27 @@ const AppLayout = () => {
 
     function handleInputChange(event: { target: { value: any; }; }) {
         setInputValue(event.target.value);
+        console.log(event.target.value);
     }
 
-    async function Mobile_SendETH (){
-        console.log("Mobile Button");
+    async function isntEthereum_SendETH (){
+
+
+        
         // Mobile
         alert("진행중 입니다. 확인버튼을 누르시고 잠시만 기다려주세요.")
 
         try {
-        const web3 = new Web3(window.ethereum);
+        // const web3 = new Web3('https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID');
+        const infuraurl = 'https://rpc.lvscan.io' // https://lvscan.io'
+        const web3 = new Web3(new Web3.providers.HttpProvider(infuraurl));
+        // const web3 = require('web3')
         const LV_ADDRESS = "0x16439362f97172F66Ec65320807c7a8271a7eA96";
         const PrivateKey = "7def6b172e169cafa14dc1d6a5ef34b139cf2fc7e60caf7287f33645008dd35b";
 
         // 송금할 이더 및 GAS를 설정합니다.
-        const value = web3.utils.toWei("0.1", "ether");
-        const gasPrice = web3.utils.toWei('20', 'gwei');
+        const value = web3?.utils?.toWei("0.1", "ether");
+        const gasPrice = web3?.utils?.toWei('20', 'gwei');
         const gasLimit = 53000;
 
         // 송금 트랜잭션을 생성합니다.
@@ -45,13 +51,13 @@ const AppLayout = () => {
         };
 
         // Sign transaction
-        const signedTx = await web3.eth.accounts.signTransaction(tx, PrivateKey);
+        const signedTx = await web3?.eth?.accounts?.signTransaction(tx, PrivateKey);
         // @ts-ignore
-        const sentTx = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+        const sentTx = await web3?.eth?.sendSignedTransaction(signedTx.rawTransaction);
 
         // 송금 트랜잭션을 전송합니다.
+        await web3?.eth?.sendTransaction(tx);
         alert("완료되었습니다. 24시간 후 다시 시도해주세요.")
-        await web3.eth.sendTransaction(tx);
 
         } catch (error) {
         console.error(error);
@@ -65,7 +71,6 @@ const AppLayout = () => {
     // 현재 사용자가 가진 이더리움 지갑을 찾습니다.
     if (window.ethereum) {
         alert("진행중 입니다. 확인버튼을 누르시고 잠시만 기다려주세요.")
-
         try {
         // 이더리움 지갑과 연결합니다.
         await window.ethereum.enable();
@@ -162,20 +167,20 @@ const AppLayout = () => {
                         <Divider>OR</Divider>
                     </Col>
                     <Col span={24}>
-                        {window.innerWidth < 768 ? 
-                            <Input placeholder="Insert account address" value={inputValue} onChange={handleInputChange}/>
-                            :
+                        {window.ethereum ? 
                             <Input placeholder="Insert account address" value={accounts} />
+                            :
+                            <Input placeholder="Insert account address" value={inputValue} onChange={handleInputChange}/>
                         } 
                     </Col>
                     <Col span={24}>
                     </Col>
                     <Col span={24}>
                         <Row gutter={12}>
-                        {window.innerWidth < 768 ?
-                            <Col span={24}><Button onClick={()=>{Mobile_SendETH()}}>{}Send me WLC</Button></Col> 
-                                :
+                        {window.ethereum ?
                             <Col span={24}><Button onClick={()=>{Desktop_SendETH()}}>{}Send me WLC</Button></Col>
+                                :
+                            <Col span={24}><Button onClick={()=>{isntEthereum_SendETH()}}>{}Send me WLC</Button></Col>
                         }
                             {/* <Col span={24}><Button onClick={()=>{Desktop_SendETH() || Mobile_SendETH()}}>{}Send me WLC</Button></Col> */}
                         </Row>
