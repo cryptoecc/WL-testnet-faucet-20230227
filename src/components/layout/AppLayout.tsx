@@ -13,8 +13,7 @@ declare let window: any;
 const AppLayout = () => {
     const [web3, setWeb3] = useState<any>(null);
     const [accounts, setAccounts] = useState<any>([]);
-    const [inputValue,setInputValue] = useState<any>("")
-    // const [ipAddress, setIpAddress] = useState(null);
+    const [inputValue,setInputValue] = useState<string>("")
 
     function handleInputChange(event: { target: { value: any; }; }) {
         setInputValue(event.target.value);
@@ -22,45 +21,39 @@ const AppLayout = () => {
     }
 
     async function isntEthereum_SendETH (){
-
-
-        
         // Mobile
         alert("진행중 입니다. 확인버튼을 누르시고 잠시만 기다려주세요.")
 
         try {
-        // const web3 = new Web3('https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID');
-        const infuraurl = 'https://rpc.lvscan.io' // https://lvscan.io'
-        const web3 = new Web3(new Web3.providers.HttpProvider(infuraurl));
-        // const web3 = require('web3')
-        const LV_ADDRESS = "0x16439362f97172F66Ec65320807c7a8271a7eA96";
-        const PrivateKey = "7def6b172e169cafa14dc1d6a5ef34b139cf2fc7e60caf7287f33645008dd35b";
+            const infuraurl = 'https://rpc.lvscan.io' // https://rpc.lvscan.io'
+            const web3 = new Web3(new Web3.providers.HttpProvider(infuraurl));
+            const LV_ADDRESS = "0x16439362f97172F66Ec65320807c7a8271a7eA96";
+            const PrivateKey:string = process.env.REACT_APP_PRIVATE_KEY!;
 
-        // 송금할 이더 및 GAS를 설정합니다.
-        const value = web3?.utils?.toWei("0.1", "ether");
-        const gasPrice = web3?.utils?.toWei('20', 'gwei');
-        const gasLimit = 53000;
+            // 송금할 이더 및 GAS를 설정합니다.
+            const value = web3?.utils?.toWei("2", "ether");
+            const gasPrice = web3?.utils?.toWei('20', 'gwei');
+            const gasLimit = 53000;
 
-        // 송금 트랜잭션을 생성합니다.
-        const tx = {
-            from: LV_ADDRESS, // 내 계정
-            to: inputValue,
-            value: value,
-            gasPrice : gasPrice,
-            gas: gasLimit
-        };
+            // 송금 트랜잭션을 생성합니다.
+            const tx = {
+                from: LV_ADDRESS, // 내 계정
+                to: inputValue,
+                value: value,
+                gasPrice : gasPrice,
+                gas: gasLimit
+            };
 
-        // Sign transaction
-        const signedTx = await web3?.eth?.accounts?.signTransaction(tx, PrivateKey);
-        // @ts-ignore
-        const sentTx = await web3?.eth?.sendSignedTransaction(signedTx.rawTransaction);
+            // Sign transaction
+            const signedTx = await web3?.eth?.accounts?.signTransaction(tx, PrivateKey);
+            // @ts-ignore
+            const sentTx = await web3?.eth?.sendSignedTransaction(signedTx.rawTransaction);
 
-        // 송금 트랜잭션을 전송합니다.
-        await web3?.eth?.sendTransaction(tx);
-        alert("완료되었습니다. 24시간 후 다시 시도해주세요.")
-
+            // 송금 트랜잭션을 전송합니다.
+            await web3?.eth?.sendTransaction(tx);
+            alert("완료되었습니다. 24시간 후 다시 시도해주세요.")
         } catch (error) {
-        console.error(error);
+            console.error(error);
         }
     }
 
@@ -90,10 +83,9 @@ const AppLayout = () => {
         const account = accounts[0];
 
         const LV_ADDRESS = "0x16439362f97172F66Ec65320807c7a8271a7eA96";
-        const PrivateKey = "7def6b172e169cafa14dc1d6a5ef34b139cf2fc7e60caf7287f33645008dd35b";
-
+        const PrivateKey:string = process.env.REACT_APP_PRIVATE_KEY!;
         // 송금할 이더 및 GAS를 설정합니다.
-        const value = web3.utils.toWei("0.1", "ether");
+        const value = web3.utils.toWei("2", "ether");
         const gasPrice = web3.utils.toWei('20', 'gwei');
         const gasLimit = 53000;
 
@@ -137,7 +129,8 @@ const AppLayout = () => {
           }
         } else {
           console.error("MetaMask를 찾을 수 없습니다.");
-          alert("MetaMask를 찾을 수 없습니다.")
+        //   alert("MetaMask를 설치 후 시도해 주시기 바랍니다.")
+          alert("MetaMask를 설치 후 시도해 주시기 바랍니다.")
         }
       };
 
@@ -153,7 +146,7 @@ const AppLayout = () => {
                         <Title level={1}>WorldLand TEST NETWORK</Title>
                     </Col>
                     <Col span={24}>
-                        <Text>Fast and reliable. 0.1 WLC / day.</Text>
+                        <Text>Fast and reliable. 2 WLC / day.</Text>
                     </Col>
                 </Row>
 
@@ -171,7 +164,7 @@ const AppLayout = () => {
                             <Input placeholder="Insert account address" value={accounts} />
                             :
                             <Input placeholder="Insert account address" value={inputValue} onChange={handleInputChange}/>
-                        } 
+                        }
                     </Col>
                     <Col span={24}>
                     </Col>
@@ -182,7 +175,6 @@ const AppLayout = () => {
                                 :
                             <Col span={24}><Button onClick={()=>{isntEthereum_SendETH()}}>{}Send me WLC</Button></Col>
                         }
-                            {/* <Col span={24}><Button onClick={()=>{Desktop_SendETH() || Mobile_SendETH()}}>{}Send me WLC</Button></Col> */}
                         </Row>
                     </Col>
                 </Row>
